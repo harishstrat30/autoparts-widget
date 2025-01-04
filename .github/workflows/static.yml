@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoparts Custom View</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling on the parent page */
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full screen height */
+            overflow: hidden; /* Hide overflowing content */
+        }
+
+        iframe {
+            position: absolute;
+            top: -150px; /* Adjust to hide the top header */
+            width: 100%;
+            height: calc(100% + 300px); /* Add extra height for hidden header/footer */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="iframe-container">
+        <!-- Embed the external website -->
+        <iframe id="customIframe" src="https://autoparts.com"></iframe>
+    </div>
+
+    <script>
+        // Adjust iframe content height dynamically
+        const iframe = document.getElementById('customIframe');
+        iframe.onload = () => {
+            const iframeHeight = window.innerHeight - 200; // Visible area height (e.g., 200px hidden)
+            iframe.style.height = iframeHeight + 'px';
+        };
+    </script>
+</body>
+</html>
