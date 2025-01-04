@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoparts Embed</title>
+    <style>
+        iframe {
+            width: 100%;
+            height: 100vh; /* Full height */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="embedFrame" src="https://autoparts.com"></iframe>
+
+    <script>
+        // Attempt to hide header/footer using CSS injection if allowed
+        document.getElementById("embedFrame").onload = function() {
+            const iframe = document.getElementById("embedFrame").contentWindow.document;
+
+            try {
+                const style = iframe.createElement("style");
+                style.innerHTML = `
+                    header, footer {
+                        display: none !important;
+                    }
+                `;
+                iframe.head.appendChild(style);
+            } catch (error) {
+                console.error("Unable to modify iframe content due to cross-origin restrictions.");
+            }
+        };
+    </script>
+</body>
+</html>
