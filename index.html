@@ -7,25 +7,38 @@
     <style>
         body {
             margin: 0;
-            overflow: hidden; /* Prevent outer scrolling */
+            overflow: hidden; /* Prevent scrolling on the parent page */
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full screen height */
+            overflow: hidden; /* Hide overflowing content */
         }
 
         iframe {
+            position: absolute;
+            top: -150px; /* Adjust to hide the top header */
             width: 100%;
-            height: calc(100vh - 200px); /* Adjust height, leaving 200px hidden */
+            height: calc(100% + 300px); /* Add extra height for hidden header/footer */
             border: none;
-            position: relative;
-            top: -1000px; /* Hide the top section */
-        }
-
-        /* Hide the outer iframe scrollbar */
-        iframe::-webkit-scrollbar {
-            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Embed the external website -->
-    <iframe src="https://autoparts.com" scrolling="no"></iframe>
+    <div class="iframe-container">
+        <!-- Embed the external website -->
+        <iframe id="customIframe" src="https://autoparts.com"></iframe>
+    </div>
+
+    <script>
+        // Adjust iframe content height dynamically
+        const iframe = document.getElementById('customIframe');
+        iframe.onload = () => {
+            const iframeHeight = window.innerHeight - 200; // Visible area height (e.g., 200px hidden)
+            iframe.style.height = iframeHeight + 'px';
+        };
+    </script>
 </body>
 </html>
